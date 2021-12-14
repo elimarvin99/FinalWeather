@@ -26,6 +26,7 @@ namespace FinalWeather.Models
             var tempMin = double.Parse(JObject.Parse(weatherResponse)["main"]["temp_min"].ToString());
             var tempMax = double.Parse(JObject.Parse(weatherResponse)["main"]["temp_max"].ToString());
             var icon = JObject.Parse(weatherResponse)["weather"][0]["icon"].ToString();//icon is in index 0 of the weather array
+            var country = JObject.Parse(weatherResponse)["sys"]["country"].ToString();
             var weather = new Weather();
             weather.Temp = temp;
             weather.FeelsLike = feelsLike;
@@ -33,6 +34,7 @@ namespace FinalWeather.Models
             weather.TempMin = tempMin;
             weather.TempMax = tempMax;
             weather.Icon = icon;
+            weather.Country = country;
             return weather;
         }
     }

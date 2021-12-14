@@ -13,5 +13,6 @@ namespace FinalWeather.Models
         public double TempMin { get; set; }
         public double TempMax { get; set; }
         public string Icon { get; set; }
+        public string Country { get; set; }
     }
 }

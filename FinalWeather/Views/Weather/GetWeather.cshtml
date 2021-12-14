@@ -3,17 +3,12 @@
         Layout = null;
     }
 
-    @*<!DOCTYPE html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link rel="stylesheet" href="~/CSS/site.css" />
-</head>*@
+  
 
 <center>
     <h2>Please enter a City to find out the weather</h2>
 @*this form gets us the city for our api*@
-@using (Html.BeginForm("Index", "Weather", FormMethod.Get))
+@using (Html.BeginForm("GetWeather", "Weather", FormMethod.Get))
     {
         <label asp-for="City" class="control-label">City Name</label>
         <input type="text" name="City" class="form-control" value="" />
@@ -28,7 +23,7 @@
         <img src="@Html.Raw($"http://openweathermap.org/img/wn/{Model.Icon}@2x.png")" />
     }
 
-    <h3>The current temperature in @Model.City is:</h3>
+    <h3>The current temperature in @Model.City, @Model.Country is:</h3>
     <p>@Model.Temp</p>
     <p>The weather feels like: @Model.FeelsLike</p>
     <p>Todays High: @Model.TempMax</p>

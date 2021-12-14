@@ -5,8 +5,8 @@
 
 <center>
     <h2>הקלד עיר באנגלית כדי לגלות את מזג האוויר </h2>
-    @*this form gets us the city for our api*@
-    @using (Html.BeginForm("Index", "Weather", FormMethod.Get))
+    @*this form gets us the city for our api. we call the controller, and accces our model with our fo*@
+    @using (Html.BeginForm("GetWeatherHebrew", "Weather", FormMethod.Get))
     {
         <label asp-for="City" class="control-label">שם העיר</label>
         <input type="text" name="City" class="form-control" value="" />
@@ -21,9 +21,10 @@
         <img src="@Html.Raw($"http://openweathermap.org/img/wn/{Model.Icon}@2x.png")" />
     }
 
-<h3>מזג האוויר ב @Model.City היא</h3>
+<h3>מזג האוויר </h3>
+<p>@Model.City, @Model.Country</p>
     <p>@Model.Temp</p>
-    <p>מזג האוויר מרגיש כמו @Model.FeelsLike </p>
+    <p>@Model.FeelsLike :מרגיש כמו</p>
     <p>גבוה של: @Model.TempMax</p>
     <p>נמוך של: @Model.TempMin</p>
 </center>

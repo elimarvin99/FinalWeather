@@ -34,12 +34,13 @@ namespace FinalWeather.Controllers
                 //this gets the city for weather and than we return that model
                 //if city is passed in than we update the weather model that we are returning to have that city
                 weather = repo.GetWeather(char.ToUpper(city[0]) + city.Substring(1)); //This method returns the city to us with the first letter uppercased
+                return View(weather);
             }
             catch //If city isn't spelled correctly we get returned to the home page.
             {
                 return RedirectToAction("Index", "Weather");
             }
-            return View(weather);
+            
         }
 
         public IActionResult GetWeatherHebrew(string city)
@@ -55,12 +56,13 @@ namespace FinalWeather.Controllers
                 //this gets the city for weather and than we return that model
                 //if city is passed in than we update the weather model that we are returning to have that city
                 weather = repo.GetWeather(char.ToUpper(city[0]) + city.Substring(1)); //This method returns the city to us with the first letter uppercased
+                return View(weather);
             }
             catch //If city isn't spelled correctly we get returned to the home page.
             {
                 return RedirectToAction("Index", "Weather");
             }
-            return View(weather);
+            
         }
     }
 }
