@@ -1,0 +1,29 @@
+﻿@model Weather
+@{
+    Layout = null;
+}
+
+<center>
+    <h2>הקלד עיר באנגלית כדי לגלות את מזג האוויר </h2>
+    @*this form gets us the city for our api*@
+    @using (Html.BeginForm("Index", "Weather", FormMethod.Get))
+    {
+        <label asp-for="City" class="control-label">שם העיר</label>
+        <input type="text" name="City" class="form-control" value="" />
+        <input type="submit" value="Enter City" class="btn btn-primary" />
+    }
+    @if (Model.Icon == null)
+    {
+        <img src="@Html.Raw($"http://openweathermap.org/img/wn/02d@2x.png")" />
+    }
+    else
+    {
+        <img src="@Html.Raw($"http://openweathermap.org/img/wn/{Model.Icon}@2x.png")" />
+    }
+
+<h3>מזג האוויר ב @Model.City היא</h3>
+    <p>@Model.Temp</p>
+    <p>מזג האוויר מרגיש כמו @Model.FeelsLike </p>
+    <p>גבוה של: @Model.TempMax</p>
+    <p>נמוך של: @Model.TempMin</p>
+</center>
