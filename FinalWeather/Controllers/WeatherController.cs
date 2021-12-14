@@ -15,7 +15,13 @@ namespace FinalWeather.Controllers
         {
             this.repo = repo;
         }
-        public IActionResult Index(string city)
+        //this is our index method that just returns the view as styled in the index.file of the weather folder.
+        public IActionResult Index()
+        {
+            return View();
+        }
+        //this is our method that gets the weather and is accessed from the index view of of the home/weather page
+        public IActionResult GetWeather(string city)
         {
             var weather = new Weather();
             //this is for the begining when city will be null.
@@ -23,15 +29,15 @@ namespace FinalWeather.Controllers
             {
                 return View(weather);
             }
-            try 
+            try
             {
                 //this gets the city for weather and than we return that model
                 //if city is passed in than we update the weather model that we are returning to have that city
                 weather = repo.GetWeather(char.ToUpper(city[0]) + city.Substring(1)); //This method returns the city to us with the first letter uppercased
             }
-            catch //If city isn't spelled correctly
+            catch //If city isn't spelled correctly we get returned to the home page.
             {
-                return RedirectToAction("Index","Weather");
+                return RedirectToAction("Index", "Weather");
             }
             return View(weather);
         }
