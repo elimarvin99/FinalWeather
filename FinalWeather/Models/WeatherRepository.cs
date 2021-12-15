@@ -17,9 +17,15 @@ namespace FinalWeather.Models
         }
 
         //the city value we will get from the html. at first it will be null and display just the html and when the city is added we will display weather info
-        public Weather GetWeather(string City)
+        //add input for celcius or fahrenheit
+        public Weather GetWeather(string City, string Unit="imperial")
         {
-            var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=imperial&appid=" + _conn;
+            //because default of unit is imperial we will get back fahrenheit unless celcius is checked and than metric will be passed into the api call
+            if (Unit != "imperial")
+            {
+                Unit = "metric";
+            }
+            var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + City + "&units=" + Unit + "&appid=" + _conn;
             var weatherClient = new HttpClient();
             var weatherResponse = weatherClient.GetStringAsync(weatherUrl).Result; //won't be succesful at first because City is null. add default?
             var temp = double.Parse(JObject.Parse(weatherResponse)["main"]["temp"].ToString());

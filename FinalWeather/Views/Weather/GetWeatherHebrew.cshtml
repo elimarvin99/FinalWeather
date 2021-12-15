@@ -10,7 +10,9 @@
     {
         <label asp-for="City" class="control-label">שם העיר</label>
         <input type="text" name="City" class="form-control" value="" />
-        <input type="submit" value="Enter City" class="btn btn-primary" />
+        <input type="submit" value="הכנס עיר" class="btn btn-primary" />
+        <input type="checkbox" id="metric" name="Unit" value="">
+        <label for="metric"> צלסיוס</label><br>
     }
     @if (Model.Icon == null)
     {

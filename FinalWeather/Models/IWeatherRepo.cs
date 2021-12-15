@@ -7,6 +7,6 @@ namespace FinalWeather.Models
 {
     public interface IWeatherRepo
     {
-        public Weather GetWeather(string City);
+        public Weather GetWeather(string City, string Unit);
     }
 }
