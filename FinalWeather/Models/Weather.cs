@@ -14,5 +14,7 @@ namespace FinalWeather.Models
         public double TempMax { get; set; }
         public string Icon { get; set; }
         public string Country { get; set; }
+        public Coord Coordinates { get; set; }
+        public string GoogleMapsUrl { get; set; }
     }
 }

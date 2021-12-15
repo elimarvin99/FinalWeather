@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -27,7 +28,12 @@ namespace FinalWeather.Models
             var tempMax = double.Parse(JObject.Parse(weatherResponse)["main"]["temp_max"].ToString());
             var icon = JObject.Parse(weatherResponse)["weather"][0]["icon"].ToString();//icon is in index 0 of the weather array
             var country = JObject.Parse(weatherResponse)["sys"]["country"].ToString();
+            var lon = double.Parse(JObject.Parse(weatherResponse)["coord"]["lon"].ToString());
+            var lat = double.Parse(JObject.Parse(weatherResponse)["coord"]["lat"].ToString());
             var weather = new Weather();
+            var coordinates = new Coord();
+            coordinates.Longitude = lon;
+            coordinates.Latitude = lat;
             weather.Temp = temp;
             weather.FeelsLike = feelsLike;
             weather.City = City;
@@ -35,6 +41,12 @@ namespace FinalWeather.Models
             weather.TempMax = tempMax;
             weather.Icon = icon;
             weather.Country = country;
+            weather.Coordinates = coordinates;
+            //create googleMaps weather api
+            var key = File.ReadAllText("appsettings.json");
+            string mapsKey = JObject.Parse(key).GetValue("GOOGLE").ToString();
+            var googleMapsUrl = $"https://www.google.com/maps/embed/v1/view?key={mapsKey}&center={weather.Coordinates.Latitude},{weather.Coordinates.Longitude}&zoom=12&maptype=satellite";
+            weather.GoogleMapsUrl = googleMapsUrl;
             return weather;
         }
     }
